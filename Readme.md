@@ -247,12 +247,13 @@ línea en el archivo fuente donde este ocurre.
 
 En el repositorio encontrará los siguientes archivos:
 
-- __rvalp.pdf__: Es un documento donde encontrará información detallada de cómo
-  son escritas las instrucciones en el ensamblador. En particular le recomiendo
-  echar un vistazo al capítulo 5. La sección 5.3 es muy importante porque allí
-  encuentra el formato en el que cada instrucción debe quedar en la salida.
-- __RISCV_CARD.pdf__: Es el documento que contiene todo el conjunto de
-  instrucciones. En especial le recomiendo ver la primera página.
+- [__rvalp.pdf__](./rvalp.pdf) : Es un documento donde encontrará información
+  detallada de cómo son escritas las instrucciones en el ensamblador. En
+  particular le recomiendo echar un vistazo al capítulo 5. La sección 5.3 es muy
+  importante porque allí encuentra el formato en el que cada instrucción debe
+  quedar en la salida.
+- [__RISCV_CARD.pdf__](./RISCV_CARD.pdf): Es el documento que contiene todo el
+  conjunto de instrucciones. En especial le recomiendo ver la primera página.
 
 Adicionalmente a los archivos, los siguientes enlaces pueden resultar de
 utilidad.
