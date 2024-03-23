@@ -83,11 +83,13 @@ Cada línea no vacía de la entrada puede ser de una de las siguientes entidades
 1. Los comentarios deben ser ignorados y no deben ir en el archivo de salida.
 2. Las directivas también serán ignoradas por ahora.
 3. Por cada instrucción debe aparecer en el archivo de salida una línea de 32
-   bits (binario) con solamente ceros. Exceptuando la parte del código de operación, el cual si debe coincidir con los códigos presentados en
+   bits (binario) con solamente ceros. Exceptuando la parte del código de
+   operación, el cual si debe coincidir con los códigos presentados en
 
 ## Ejercicio 2
 
-Para este momento usted ya debe contar con una implementación que, a partir de un archivo de entrada como el siguiente:
+Para este momento usted ya debe contar con una implementación que, a partir de
+un archivo de entrada como el siguiente:
 
 
 ```assembly
@@ -141,8 +143,12 @@ representar de una mejor manera. Por ejemplo, una secuencia con la información
 realmente importante.
 
 Por ejemplo, en la instrucción ` addi x4, x10, 520` lo realmente importante es
-la información presente en la secuencia $I=\langle \text{addi}, x4, x10,
-520\rangle$. Asimismo se puede hacer con cualquiera de las otras instrucciones
+la información presente en la secuencia:
+
+ $$I=\langle \text{addi}, x4, x10, 520\rangle$$
+ 
+
+Asimismo se puede hacer con cualquiera de las otras instrucciones
 sin importar su tipo.
 
 Esta notación luce mucho mejor y usted cuenta con estructuras de datos que le
@@ -166,7 +172,9 @@ teniendo en cuenta sus conocimientos pero si ve la necesidad la puede cambiar
 más adelante. Lo importante es ir revisando las necesidades que se presentan y
 de ser necesario realizar los camios o ajustes necesarios.
 
-Adicionalmente ya debe estar familiarizado con el tratamiento del archivo de entrada y por ende ya debe estar en capacidad de codificar cualquier instrucción de tipo _R_.
+Adicionalmente ya debe estar familiarizado con el tratamiento del archivo de
+entrada y por ende ya debe estar en capacidad de codificar cualquier instrucción
+de tipo _R_.
 
 ![alt text](image-1.png)
 
@@ -178,15 +186,62 @@ deben ser representables en 12 bits.
 
 ![alt text](image-2.png)
 
-Note que la única diferencia entre los dos tipos de instrucciones es la constante o valor inmediato. Para codificar esta parte debe tener en cuenta dos aspectos: 
+Note que la única diferencia entre los dos tipos de instrucciones es la
+constante o valor inmediato. Para codificar esta parte debe tener en cuenta dos
+aspectos: 
 
 1. La constante de caer en 12 bits y de no ser el caso su programa debe fallar
    reportando el error.
-1. La constante puede ser negativa. En este caso la forma de codificarla es utilizando el complemento a 2 en su representación binaria. 
+1. La constante puede ser negativa. En este caso la forma de codificarla es
+   utilizando el complemento a 2 en su representación binaria. 
 
 Con la culminación de este ejercicio ya lleva un 40 porciento completado. Sin
 embargo, lo más importante es que ya tiene un gran conocimiento sobre su
 programa.
+
+
+## Ejercicio 4
+
+Hasta este momento falta poco para terminar con la codificación completa de las
+instrucciones de tipo _R_ y tipo _I_. Para completar las tipo $R$ es cuestión de
+codificar los campos _funct3_ y _funct7_ tal y como lo estipula la tabla para cada
+operación. Es decir, para cada instrucción tipo _R_ en la figura:
+
+![alt text](image-3.png)
+
+usted de los 32 bits ya codificó el _opcode_ el cual es el mismo para todas
+(ejercicio 1). El registro _rd_ del cuaál codificó el número. Por ejemplo `add
+x2, x5, x7`, codificó el 2 en los siguientes 5 bits (después del _opcode_).
+Luego sigue el _funct3_ que depende de la operación específica. Tenga cuidado que
+en la tabla aparece un hexadecimal (`0x4` en el caso de la operación `xor`) que
+debe ir codificado en 3 bits. Luego siguen los campos _rs1_ y _rs2_ los cuales
+se traducen en la misma forma que lo hizo con _rd_ (5 bits para cada uno). Por
+último queda _funct7_ que es cero para todas las instrucciones a excepción de
+`sub` y `sra` donde se codifica el hexadecimal `0x20` en 7 bits.
+
+Para completar la codificación de las instrucciones tipo _I_ no es mucho lo que
+falta.
+
+![alt text](image-4.png)
+
+El _opcode_ ya debe estar codificado desde el ejercicio 1. El _funct3_ debe
+codificarlo en 3 bits de la misma forma que codificó el de las tipo _R_ (tenga
+en cuenta que es diferente por cada operación). La constante de estas
+operaciones está en la parte donde estaban el _rs2_ y el _funct7_ para las tipo
+_R_:
+
+![alt text](image-5.png)
+
+todas las operaciones tipo _I_ deben llevar la constante codificada en esta
+parte.
+
+Para completar este ejercicio, lo único que falta es verificar que para las
+siguientes instrucciones, la constante pueda ser codificada en 5 bits
+únicamente. En caso de no ser así su ensamblador emitirá un error e indicará la
+línea en el archivo fuente donde este ocurre.
+
+![alt text](image-6.png)
+
 
 ## Recursos
 
@@ -202,4 +257,5 @@ En el repositorio encontrará los siguientes archivos:
 Adicionalmente a los archivos, los siguientes enlaces pueden resultar de
 utilidad.
 
-- En [este](https://en.wikipedia.org/wiki/Two%27s_complement) enlace se define lo que es el complemento a dos de la representación binaria de un número.
+- En [este](https://en.wikipedia.org/wiki/Two%27s_complement) enlace se define
+  lo que es el complemento a dos de la representación binaria de un número.
