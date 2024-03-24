@@ -1,5 +1,15 @@
 # Estructuras de datos (primer examen)
 
+- [Estructuras de datos (primer examen)](#estructuras-de-datos-primer-examen)
+  - [Introducción](#introducción)
+  - [Ensamblador para RISCV](#ensamblador-para-riscv)
+  - [Ejercicio 1](#ejercicio-1)
+  - [Ejercicio 2](#ejercicio-2)
+  - [Ejercicio 3](#ejercicio-3)
+  - [Ejercicio 4](#ejercicio-4)
+- [Ejercicio 5](#ejercicio-5)
+  - [Recursos](#recursos)
+
 ## Introducción
 
 Para este examen usted requerirá de alguna documentación y de algo de código
@@ -90,7 +100,6 @@ Cada línea no vacía de la entrada puede ser de una de las siguientes entidades
 
 Para este momento usted ya debe contar con una implementación que, a partir de
 un archivo de entrada como el siguiente:
-
 
 ```assembly
 main:
@@ -188,7 +197,7 @@ deben ser representables en 12 bits.
 
 Note que la única diferencia entre los dos tipos de instrucciones es la
 constante o valor inmediato. Para codificar esta parte debe tener en cuenta dos
-aspectos: 
+aspectos:
 
 1. La constante de caer en 12 bits y de no ser el caso su programa debe fallar
    reportando el error.
@@ -199,25 +208,24 @@ Con la culminación de este ejercicio ya lleva un 40 porciento completado. Sin
 embargo, lo más importante es que ya tiene un gran conocimiento sobre su
 programa.
 
-
 ## Ejercicio 4
 
 Hasta este momento falta poco para terminar con la codificación completa de las
 instrucciones de tipo _R_ y tipo _I_. Para completar las tipo $R$ es cuestión de
-codificar los campos _funct3_ y _funct7_ tal y como lo estipula la tabla para cada
-operación. Es decir, para cada instrucción tipo _R_ en la figura:
+codificar los campos _funct3_ y _funct7_ tal y como lo estipula la tabla para
+cada operación. Es decir, para cada instrucción tipo _R_ en la figura:
 
 ![alt text](image-3.png)
 
 usted de los 32 bits ya codificó el _opcode_ el cual es el mismo para todas
 (ejercicio 1). El registro _rd_ del cuaál codificó el número. Por ejemplo `add
 x2, x5, x7`, codificó el 2 en los siguientes 5 bits (después del _opcode_).
-Luego sigue el _funct3_ que depende de la operación específica. Tenga cuidado que
-en la tabla aparece un hexadecimal (`0x4` en el caso de la operación `xor`) que
-debe ir codificado en 3 bits. Luego siguen los campos _rs1_ y _rs2_ los cuales
-se traducen en la misma forma que lo hizo con _rd_ (5 bits para cada uno). Por
-último queda _funct7_ que es cero para todas las instrucciones a excepción de
-`sub` y `sra` donde se codifica el hexadecimal `0x20` en 7 bits.
+Luego sigue el _funct3_ que depende de la operación específica. Tenga cuidado
+que en la tabla aparece un hexadecimal (`0x4` en el caso de la operación `xor`)
+que debe ir codificado en 3 bits. Luego siguen los campos _rs1_ y _rs2_ los
+cuales se traducen en la misma forma que lo hizo con _rd_ (5 bits para cada
+uno). Por último queda _funct7_ que es cero para todas las instrucciones a
+excepción de `sub` y `sra` donde se codifica el hexadecimal `0x20` en 7 bits.
 
 Para completar la codificación de las instrucciones tipo _I_ no es mucho lo que
 falta.
@@ -241,6 +249,54 @@ siguientes instrucciones, la constante pueda ser codificada en 5 bits
 línea en el archivo fuente donde este ocurre.
 
 ![alt text](image-6.png)
+
+# Ejercicio 5
+
+Este ejercicio va dirigido a la codificación de dos grupos nuevos de
+instrucciones: 
+
+![alt text](image-7.png)
+
+A continuación se muestra un ejemplo de la forma en que estas instrucciones se
+presentan en los programas:
+
+```assembly
+lw x10, -12(x13)
+add x10, x12, x10
+sw x10, 40(x13)
+```
+
+Es claro que aquí las únicas instrucciones del grupo que nos concierne son `lw`
+y `sw`. Solo se muestran estas como representativas de los dos grupos que nos
+interesan para esta parte.
+
+Note que el tipo de instrucciones de estos dos grupos son escritas de manera
+diferente. La instrucción tiene tres partes: el nombre, un registro y luego una
+expresión compuesta por una constante y el nombre de un registro entre
+paréntesis. Usted debe tener esta estructura en cuenta a la hora de procesarla.
+De todos modos la traducción funciona de manera muy similar a la de las
+instrucciones anteriores. En particular, las del primer grupo (_lw_ por ejemplo)
+son del tipo _I_. Esto es importante porque ya se definió como la constante debe
+ser codificada: 12 bits y en complemento a dos.
+
+La parte de la constante en las instrucciones del segundo grupo deben ser
+codificadas así:
+
+![alt text](image-8.png)
+
+Note que en este caso la constante debe quedar codificada en dos partes
+separadas de la instrucción. Aquí puede resultar más útil la siguiente imágen:
+
+![alt text](image-9.png)
+
+En la parte menos significativa está el _opcode_. Luego van los 5 bits menos
+significativos de la constante (cuya representación es en 12 bits), al final, en
+la parte más significativa van los restantes 7 bits de la constante.
+
+Su meta con este ejercicio es completar la implementación de los siguientes dos
+grupos de instrucciones. Ya con esto debe estar completo alrededor del 65% de su
+trabajo.
+
 
 
 ## Recursos
