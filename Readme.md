@@ -8,6 +8,7 @@
   - [Ejercicio 3](#ejercicio-3)
   - [Ejercicio 4](#ejercicio-4)
 - [Ejercicio 5](#ejercicio-5)
+- [Ejercicio 6](#ejercicio-6)
   - [Recursos](#recursos)
 
 ## Introducción
@@ -297,7 +298,79 @@ Su meta con este ejercicio es completar la implementación de los siguientes dos
 grupos de instrucciones. Ya con esto debe estar completo alrededor del 65% de su
 trabajo.
 
+# Ejercicio 6
 
+Este es el siguiente grupo de instrucciones que se deberá codificar:
+
+![alt text](image-10.png)
+
+Lo único relevante aquí ( lo nuevo a lo que se enfrenta ) es el cálculo de la
+constante y su almacenamiento. Para calcular la constante es necesario tener en
+cuenta la posición en la memoria de la instrucción que se está codificando y la
+posición en la memoria señalada por la etiqueta referenciada. Por ejemplo,
+considere el siguiente programa (prestando atención a los comentarios!):
+
+```assembly
+main:                       ; primera etiqueta
+    addi x4, zero, 520      ; primera instrucción
+    addi x5, zero, 1550     ; segunda instrucción
+    beq x4, x5, label1      ; tercera instrucción
+    addi x6, zero, 80       ; cuarta instrucción
+    beq zero, zero, label2  ; quinta instrucción
+    
+
+label1:                     ; segunda etiqueta
+    addi x6, zero, 100      ; sexta instrucción
+
+label2:                     ; tercera etiqueta
+    add zero, zero, zero    ; séptima instrucción
+```
+
+Ese programa quedará en la memoria de la siguiente forma:
+
+| Dirección         | Instrucción                |
+| ----------------- | -------------------------- |
+| 0                 | addi x4, zero, 520         |
+| 4                 | addi x5, zero, 1550        |
+| 8                 | beq x4, x5, __label1__     |
+| 12                | addi x6, zero, 80          |
+| 16                | beq zero, zero, __label2__ |
+| 20   (__label1__) | addi x6, zero, 100         |
+| 24   (__label2__) | add zero, zero, zero       |
+
+Para calcular como se debe codificar una etiqueta hay que tener en cuenta dos
+partes: la parte en la que la etiqueta es definida y la parte en la que la
+etiqueta es utilizada. En nuestro caso, la etiqueta _label1_ es definida para
+almacenar la dirección de la sexta instrucción. Esto quiere decir que la
+etiqueta va a "representar" el lugar en la memoria donde quedará la codificación
+de la sexta instrucción que es 20 en este caso.
+
+De otro lado, la etiqueta _label1_ es utilizada en la tercera instrucción que
+está codificada en la dirección 8. Con estos dos valores es ahora posible
+calcular la constante con la que se codificará la etiqueta para la instrucción.
+El cálculo se calcula como $i = t - p$, donde $t$ es 20 y $p$ es 8. Esto da como
+resultado $i=12$ para el valor de la constante. 
+
+Cada vez que una etiqueta sea usada en una de las instrucciones de este grupo,
+su codificación será diferente y dependerá de el valor de $p$ que depende de la
+instrucción que está siendo codificada.
+
+| Dirección         | Instrucción                |
+| ----------------- | -------------------------- |
+| 0                 | addi x4, zero, 520         |
+| 4                 | addi x5, zero, 1550        |
+| 8                 | beq x4, x5, __12__     |
+| 12                | addi x6, zero, 80          |
+| 16                | beq zero, zero, __8__ |
+| 20   (__label1__) | addi x6, zero, 100         |
+| 24   (__label2__) | add zero, zero, zero       |
+
+Note la sustitución que se realizó en las instrucciones en las que cada etiqueta
+estaba representada.
+
+El objetivo de este ejercicio es entonces que implemente la parte que calcula
+cada una de las etiquetas de su programa. En el siguiente veremos como esa
+información es codificada.
 
 ## Recursos
 
