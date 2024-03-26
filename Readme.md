@@ -9,6 +9,7 @@
   - [Ejercicio 4](#ejercicio-4)
 - [Ejercicio 5](#ejercicio-5)
 - [Ejercicio 6](#ejercicio-6)
+  - [Ejercicio 7](#ejercicio-7)
   - [Recursos](#recursos)
 
 ## Introducción
@@ -372,6 +373,43 @@ El objetivo de este ejercicio es entonces que implemente la parte que calcula
 cada una de las etiquetas de su programa. En el siguiente veremos como esa
 información es codificada.
 
+## Ejercicio 7
+
+Después de terminado el ejercicio anterior y ya habiendo calculado la constante
+del salto de cada instrucción procederemos a codificarla. Es de resaltar que la
+misma instrucción de salto será codificada de manera diferente a lo largo del
+programa. Es decir, La dirección `beq x4, x5, label1` puede aparecer exactamente
+igual en más de una posición en el programa. Como la constante a calcular es
+relativa a la posición de esta instrucción, su codificación no siempre será la
+misma.
+
+La siguiente imagen muestra la distribución de la información de una instrucción tipo _B_:
+
+![alt text](image-12.png)
+
+
+Como es posible evidenciar es muy parecida a la distribución de la información
+de las instrucciones tipo _S_ que usted ya realizó en el ejercicio 5. Es decir
+el inmediato o constante está separado en dos partes. La primera está
+comprendida por los bits del 7 al 11 (parte menos significativa) y la segunda en
+los bits del 25 al 31. Sigue siendo una constante de 12 bits pero está
+distribuida de manera diferente en la codificación.
+
+| Cod | b31 | b30 | b29 | b28 | b27 | b26 | b25 | b11 | b10 | b9  | b8  | b7  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Imm | b12 | b10 | b9  | b8  | b7  | b6  | b5  | b4  | b3  | b2  | b1  | b11 |
+
+En la tabla anterior se presenta la correspondencia entre los bits de la
+codificación y los bits de la constante. De acuerdo a esta, el bit en la
+posición 31 de la codificación tendrá el valor del bit 12 del inmediato. El bit
+de la posición 30 de la instrucción tendrá el bit 10 del inmediato y así
+sucesivamente. Note que no existe el bit 0 del inmediato, esto es porque siempre
+se tiene que ser cero y por esto, la codificación de una instrucción de este
+grupo siembre tendrá 0 como el bit menos significativos.
+
+Su trabajo en este ejercicio consiste entonces en terminar la codificación de
+las instrucciones tipo _B_ que comenzó en el ejercicio anterior.
+
 ## Recursos
 
 En el repositorio encontrará los siguientes archivos:
@@ -389,3 +427,15 @@ utilidad.
 
 - En [este](https://en.wikipedia.org/wiki/Two%27s_complement) enlace se define
   lo que es el complemento a dos de la representación binaria de un número.
+
+- En [este](https://luplab.gitlab.io/rvcodecjs) otro enlace encontrarán una
+  herramienta para comprobar que su codificación esté quedando bien hecha.
+  Básicamente ustedes le dan una instrucción y les sale la codificación. Aquí ca
+  un ejemplo relacionado con el código del ejercicio 6:
+
+  ![alt text](image-11.png)
+
+  en este caso se utilizó la página para extraer la instrucción original a
+  partir de la codificación `00520663`. Para hacerlo en el otro sentido es
+  solamente cuestión de escribir la instrucción y saldrá la codificación
+  respectiva.
