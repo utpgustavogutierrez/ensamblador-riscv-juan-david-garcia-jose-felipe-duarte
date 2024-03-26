@@ -9,7 +9,10 @@
   - [Ejercicio 4](#ejercicio-4)
 - [Ejercicio 5](#ejercicio-5)
 - [Ejercicio 6](#ejercicio-6)
-  - [Ejercicio 7](#ejercicio-7)
+- [Ejercicio 7](#ejercicio-7)
+- [Ejercicio 8](#ejercicio-8)
+- [Ejercicio 9](#ejercicio-9)
+- [Ejercicio 10](#ejercicio-10)
   - [Recursos](#recursos)
 
 ## Introducción
@@ -373,7 +376,7 @@ El objetivo de este ejercicio es entonces que implemente la parte que calcula
 cada una de las etiquetas de su programa. En el siguiente veremos como esa
 información es codificada.
 
-## Ejercicio 7
+# Ejercicio 7
 
 Después de terminado el ejercicio anterior y ya habiendo calculado la constante
 del salto de cada instrucción procederemos a codificarla. Es de resaltar que la
@@ -409,6 +412,79 @@ grupo siembre tendrá 0 como el bit menos significativos.
 
 Su trabajo en este ejercicio consiste entonces en terminar la codificación de
 las instrucciones tipo _B_ que comenzó en el ejercicio anterior.
+
+# Ejercicio 8
+
+Hasta este punto ya deben estar codificadas la mayoría de las instrucciones,
+solo quedan faltando 6 de las cuales 2 son realmente básicas así que sería más
+preciso hablar de 4 aunque de esos 4 hay una instrucción que es de tipo _I_ en
+la cual usted ya tiene experiencia así que se puede reducir a 3 instrucciones.
+
+![alt text](image-13.png)
+
+La instrucción `jalr` es codificada de la siguiente forma:
+
+![alt text](image-14.png)
+
+En este caso lo único complicado es que se trata de una constante de 21 bits.
+Las otras dos partes son simplemente dos valores, un _opcode_ de 7 bits y un
+registro de 5. La codificación de la constante dentro de la instrucción se
+realiza de la siguiente manera:
+
+| Cod | b31 | b30 | b29 | b28 | b27 | b26 | b25 | b24 | b23 | b22 | b21 | b20 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Imm | b20 | b10 | b9  | b8  | b7  | b6  | b5  | b4  | b3  | b2  | b1  | b11 |
+
+
+| Cod | b19 | b18 | b17 | b16 | b15 | b14 | b13 | b12 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Imm | b19 | b18 | b17 | b16 | b15 | b14 | b13 | b12 |
+
+Por razones de espacio la codificación se separa en dos partes. La primera parte
+presenta la correspondencia entre bits de la constante con bits de la
+instrucción hasta los bits 20 y 11 respectivamente. En la segunda parte se
+muestra el resto. Nuevamente note que no existe bit 0 en la constante. Esto se
+debe a lo mismo del ejercicio anterior. La codificación de esta instrucción
+siempre tendrá un 0 como bit menos significativo.
+
+Su trabajo en este ejercicio es codificar la instrucción `jal`y probar que la
+codificación de `jalr`esté funcionando bien. Esta última es de tipo _I_ así que
+usted ya debe estar en capacidad de entenderla.
+
+# Ejercicio 9
+
+Las dos instrucciones que usted codificará en este ejercicio son:
+
+![alt text](image-15.png)
+
+Son realmente sencillas, más que las del punto anterior. Tienen el siguiente
+formato:
+
+![alt text](image-16.png)
+
+En este caso la constante es de 20 bits y será asignada a la codificación de la
+siguiente manera:
+
+| Cod | b31 | b30 | b29 | b28 | b27 | b26 | b25 | b24 | b23 | b22 | b21 | b20 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Imm | b19 | b18 | b17 | b16 | b15 | b14 | b13 | b12 | b11 | b10 | b9  | b8  |
+
+
+| Cod | b19 | 18  | 17  | 16  | 15  | 14  | 13  | 12  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Imm | b7  | b6  | b5  | b4  | b3  | b2  | b1  | b0  |
+
+
+# Ejercicio 10
+
+En este ejercicio usted finalmente probará todo. Si necesita programas de
+ejemplos los puede construir usted mismo en [esta](https://godbolt.org/) página
+web. Usted escribe un programa en C en el editor de la izquierda y
+automáticamente se compila y se emite el código en ensamblador. Tenga en cuenta las siguientes opciones a la hora de generar desde esa herramienta:
+
+![alt text](image-17.png)
+
+La opción `-O0` es una letra "o" en mayúscula seguida por el número cero.
 
 ## Recursos
 
