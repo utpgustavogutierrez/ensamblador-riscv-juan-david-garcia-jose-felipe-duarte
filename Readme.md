@@ -548,6 +548,7 @@ utilidad.
 ## Aritméticas y lógicas
 
 ![](./itype.svg)
+![](./iimm.svg)
 
 | Imm12     | RS1 | Funct3 | RD  | Opcode  | Name  |
 | --------- | --- | ------ | --- | ------- | ----- |
@@ -594,6 +595,7 @@ utilidad.
 ## Tipo S
 
 ![](./stype.svg)
+![](./simm.svg)
 
 | Imm7      | RS2 | RS1 | Funct3 | Imm5     | Opcode  | Name |
 | --------- | --- | --- | ------ | -------- | ------- | ---- |
@@ -604,6 +606,7 @@ utilidad.
 ## Tipo B
 
 ![](./btype.svg)
+![](./bimm.svg)
 
 | Imm7            | RS2 | RS1 | Funct3 | Imm5           | Opcode  | Name |
 | --------------- | --- | --- | ------ | -------------- | ------- | ---- |
@@ -617,6 +620,7 @@ utilidad.
 ## Tipo J
 
 ![](./jtype.svg)
+![](./jimm.svg)
 
 | Imm20                          | RD  | Opcode  | Name |
 | ------------------------------ | --- | ------- | ---- |
@@ -624,9 +628,11 @@ utilidad.
 
 ## Tipo U
 
-![](./utype.svg)
+![U Type](./utype.svg)
+![U Immediate](./uimm.svg) 
 
 | Imm20      | RD  | Opcode  | Name  |
 | ---------- | --- | ------- | ----- |
 | imm[31:12] | rd  | 0110111 | LUI   |
 | imm[31:12] | rd  | 0010111 | AUIPC |
+
