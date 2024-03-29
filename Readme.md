@@ -147,7 +147,13 @@ funcionalidad.
 Casi todas las instrucciones tienen un registro destino, esto se puede apreciar
 en la siguiente imagen.
 
-![alt text](image.png)
+![](./rtype.svg)
+![](./itype.svg)
+![](./stype.svg)
+![](./btype.svg)
+![](./utype.svg)
+![](./jtype.svg)
+
 
 Como se puede apreciar en la figura anterior, a excepción de las instrucciones
 del tipo _S_ y _B_, las demás tienen un campo _rd_. En esta parte usted
@@ -306,6 +312,7 @@ trabajo.
 
 Este es el siguiente grupo de instrucciones que se deberá codificar:
 
+
 ![alt text](image-10.png)
 
 Lo único relevante aquí ( lo nuevo a lo que se enfrenta ) es el cálculo de la
@@ -332,6 +339,7 @@ label2:                     ; tercera etiqueta
 
 Ese programa quedará en la memoria de la siguiente forma:
 
+<!-- 
 | Dirección         | Instrucción                |
 | ----------------- | -------------------------- |
 | 0                 | addi x4, zero, 520         |
@@ -340,7 +348,7 @@ Ese programa quedará en la memoria de la siguiente forma:
 | 12                | addi x6, zero, 80          |
 | 16                | beq zero, zero, __label2__ |
 | 20   (__label1__) | addi x6, zero, 100         |
-| 24   (__label2__) | add zero, zero, zero       |
+| 24   (__label2__) | add zero, zero, zero       | -->
 
 
 ![](./exprogram.drawio.svg)
