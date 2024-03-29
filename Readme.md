@@ -271,9 +271,8 @@ este ocurre.
 # Ejercicio 5
 
 Este ejercicio va dirigido a la codificación de dos grupos nuevos de
-instrucciones: 
-
-![alt text](image-7.png)
+instrucciones las [tipo I](#tipo-i) para carga de información desde la memoria y
+las [tipo S](#tipo-s) para almacenamiento de información. 
 
 A continuación se muestra un ejemplo de la forma en que estas instrucciones se
 presentan en los programas:
@@ -315,10 +314,8 @@ trabajo.
 
 # Ejercicio 6
 
-Este es el siguiente grupo de instrucciones que se deberá codificar:
-
-
-![alt text](image-10.png)
+Este es el siguiente grupo de instrucciones que se deberá codificar las
+instrucciones [tipo B](#tipo-b).
 
 Lo único relevante aquí ( lo nuevo a lo que se enfrenta ) es el cálculo de la
 constante y su almacenamiento. Para calcular la constante es necesario tener en
@@ -408,7 +405,6 @@ La siguiente imagen muestra la distribución de la información de una instrucci
 
 ![](./btype.svg)
 
-
 Como es posible evidenciar es muy parecida a la distribución de la información
 de las instrucciones tipo _S_ que usted ya realizó en el ejercicio 5. Es decir
 el inmediato o constante está separado en dos partes. La primera está
@@ -438,12 +434,10 @@ solo quedan faltando 6 de las cuales 2 son realmente básicas así que sería m�
 preciso hablar de 4 aunque de esos 4 hay una instrucción que es de tipo _I_ en
 la cual usted ya tiene experiencia así que se puede reducir a 3 instrucciones.
 
-![alt text](image-13.png)
-
-La instrucción `jalr` es codificada de la siguiente forma:
+La instrucción `jalr`, que pertenece al grupo de instrucciones [Tipo J](#tipo-j)
+es codificada de la siguiente forma:
 
 ![](./jtype.svg)
-
 
 En este caso lo único complicado es que se trata de una constante de 21 bits.
 Las otras dos partes son simplemente dos valores, un _opcode_ de 7 bits y un
@@ -472,15 +466,11 @@ usted ya debe estar en capacidad de entenderla.
 
 # Ejercicio 9
 
-Las dos instrucciones que usted codificará en este ejercicio son:
-
-![alt text](image-15.png)
-
-Son realmente sencillas, más que las del punto anterior. Tienen el siguiente
-formato:
+Las dos instrucciones que usted codificará en este ejercicio son las del [tipo
+U](#tipo-u). Son realmente sencillas, más que las del punto anterior. Tienen el
+siguiente formato:
 
 ![](./utype.svg)
-
 
 En este caso la constante es de 20 bits y será asignada a la codificación de la
 siguiente manera:
@@ -489,11 +479,9 @@ siguiente manera:
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Imm | b19 | b18 | b17 | b16 | b15 | b14 | b13 | b12 | b11 | b10 | b9  | b8  |
 
-
 | Cod | b19 | 18  | 17  | 16  | 15  | 14  | 13  | 12  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Imm | b7  | b6  | b5  | b4  | b3  | b2  | b1  | b0  |
-
 
 # Ejercicio 10
 
