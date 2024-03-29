@@ -255,11 +255,11 @@ todas las operaciones tipo _I_ deben llevar la constante codificada en esta
 parte.
 
 Para completar este ejercicio, lo único que falta es verificar que para las
-siguientes instrucciones, la constante pueda ser codificada en 5 bits
-únicamente. En caso de no ser así su ensamblador emitirá un error e indicará la
-línea en el archivo fuente donde este ocurre.
+instrucciones: __slli__, __srli__, __srai__, la constante pueda ser codificada en 5 bits únicamente como lo muestra la siguiente figura. Los demás valores deben ser 0 excepto para la operación __srai__ que por tener el mismo _funct3_ de __srli__ se diferencia de ella en el bit 30 que para __srai__ debe ser 1. En caso de no ser así
+su ensamblador emitirá un error e indicará la línea en el archivo fuente donde
+este ocurre.
 
-![alt text](image-6.png)
+![](./ishifttype.svg)
 
 # Ejercicio 5
 
@@ -368,7 +368,9 @@ Cada vez que una etiqueta sea usada en una de las instrucciones de este grupo,
 su codificación será diferente y dependerá de el valor de $p$ que depende de la
 instrucción que está siendo codificada.
 
-| Dirección         | Instrucción                |
+![](./exprogram-resolved.drawio.svg)
+
+<!-- | Dirección         | Instrucción                |
 | ----------------- | -------------------------- |
 | 0                 | addi x4, zero, 520         |
 | 4                 | addi x5, zero, 1550        |
@@ -376,7 +378,7 @@ instrucción que está siendo codificada.
 | 12                | addi x6, zero, 80          |
 | 16                | beq zero, zero, __8__ |
 | 20   (__label1__) | addi x6, zero, 100         |
-| 24   (__label2__) | add zero, zero, zero       |
+| 24   (__label2__) | add zero, zero, zero       | -->
 
 Note la sustitución que se realizó en las instrucciones en las que cada etiqueta
 estaba representada.
