@@ -13,7 +13,19 @@
 - [Ejercicio 8](#ejercicio-8)
 - [Ejercicio 9](#ejercicio-9)
 - [Ejercicio 10](#ejercicio-10)
-  - [Recursos](#recursos)
+- [Recursos](#recursos)
+- [Resumen de instrucciones](#resumen-de-instrucciones)
+  - [Tipo R](#tipo-r)
+  - [Tipo I](#tipo-i)
+  - [Aritméticas y lógicas](#aritméticas-y-lógicas)
+  - [Corrimientos](#corrimientos)
+  - [Carga en memoria](#carga-en-memoria)
+  - [Saltos incondicionales](#saltos-incondicionales)
+  - [Interrupciones](#interrupciones)
+  - [Tipo S](#tipo-s)
+  - [Tipo B](#tipo-b)
+  - [Tipo J](#tipo-j)
+  - [Tipo U](#tipo-u)
 
 ## Introducción
 
@@ -223,24 +235,19 @@ programa.
 Hasta este momento falta poco para terminar con la codificación completa de las
 instrucciones de tipo _R_ y tipo _I_. Para completar las tipo $R$ es cuestión de
 codificar los campos _funct3_ y _funct7_ tal y como lo estipula la tabla para
-cada operación. Es decir, para cada instrucción tipo _R_ en la figura:
+cada operación. Es decir, para cada instrucción [tipo _R_](#tipo-r), usted de
+los 32 bits ya codificó el _opcode_ el cual es el mismo para todas (ejercicio
+1). El registro _rd_ del cuaál codificó el número. Por ejemplo `add x2, x5, x7`,
+codificó el 2 en los siguientes 5 bits (después del _opcode_). Luego sigue el
+_funct3_ que depende de la operación específica. Tenga cuidado que en la tabla
+aparece un hexadecimal (`0x4` en el caso de la operación `xor`) que debe ir
+codificado en 3 bits. Luego siguen los campos _rs1_ y _rs2_ los cuales se
+traducen en la misma forma que lo hizo con _rd_ (5 bits para cada uno). Por
+último queda _funct7_ que es cero para todas las instrucciones a excepción de
+`sub` y `sra` donde se codifica el hexadecimal `0x20` en 7 bits.
 
-![alt text](image-3.png)
-
-usted de los 32 bits ya codificó el _opcode_ el cual es el mismo para todas
-(ejercicio 1). El registro _rd_ del cuaál codificó el número. Por ejemplo `add
-x2, x5, x7`, codificó el 2 en los siguientes 5 bits (después del _opcode_).
-Luego sigue el _funct3_ que depende de la operación específica. Tenga cuidado
-que en la tabla aparece un hexadecimal (`0x4` en el caso de la operación `xor`)
-que debe ir codificado en 3 bits. Luego siguen los campos _rs1_ y _rs2_ los
-cuales se traducen en la misma forma que lo hizo con _rd_ (5 bits para cada
-uno). Por último queda _funct7_ que es cero para todas las instrucciones a
-excepción de `sub` y `sra` donde se codifica el hexadecimal `0x20` en 7 bits.
-
-Para completar la codificación de las instrucciones tipo _I_ no es mucho lo que
-falta.
-
-![alt text](image-4.png)
+Para completar la codificación de las instrucciones [tipo _I_](#tipo-i)
+(aritméticas y de corrimientos) no es mucho lo que falta.
 
 El _opcode_ ya debe estar codificado desde el ejercicio 1. El _funct3_ debe
 codificarlo en 3 bits de la misma forma que codificó el de las tipo _R_ (tenga
@@ -499,7 +506,7 @@ automáticamente se compila y se emite el código en ensamblador. Tenga en cuent
 
 La opción `-O0` es una letra "o" en mayúscula seguida por el número cero.
 
-## Recursos
+# Recursos
 
 En el repositorio encontrará los siguientes archivos:
 
@@ -528,3 +535,110 @@ utilidad.
   partir de la codificación `00520663`. Para hacerlo en el otro sentido es
   solamente cuestión de escribir la instrucción y saldrá la codificación
   respectiva.
+
+# Resumen de instrucciones
+
+## Tipo R
+
+![](./rtype.svg)
+
+| Funct7  | RS2 | RS1 | Funct3 | RD  | Opcode  | Name |
+| ------- | --- | --- | ------ | --- | ------- | ---- |
+| 0000000 | rs2 | rs1 | 000    | rd  | 0110011 | ADD  |
+| 0100000 | rs2 | rs1 | 000    | rd  | 0110011 | SUB  |
+| 0000000 | rs2 | rs1 | 001    | rd  | 0110011 | SLL  |
+| 0000000 | rs2 | rs1 | 010    | rd  | 0110011 | SLT  |
+| 0000000 | rs2 | rs1 | 011    | rd  | 0110011 | SLTU |
+| 0000000 | rs2 | rs1 | 100    | rd  | 0110011 | XOR  |
+| 0000000 | rs2 | rs1 | 101    | rd  | 0110011 | SRL  |
+| 0100000 | rs2 | rs1 | 101    | rd  | 0110011 | SRA  |
+| 0000000 | rs2 | rs1 | 110    | rd  | 0110011 | OR   |
+| 0000000 | rs2 | rs1 | 111    | rd  | 0110011 | AND  |
+
+## Tipo I
+
+## Aritméticas y lógicas
+
+![](./itype.svg)
+
+| Imm12     | RS1 | Funct3 | RD  | Opcode  | Name  |
+| --------- | --- | ------ | --- | ------- | ----- |
+| imm[11:0] | rs1 | 000    | rd  | 0010011 | ADDI  |
+| imm[11:0] | rs1 | 010    | rd  | 0010011 | SLTI  |
+| imm[11:0] | rs1 | 011    | rd  | 0010011 | SLTIU |
+| imm[11:0] | rs1 | 100    | rd  | 0010011 | XORI  |
+| imm[11:0] | rs1 | 110    | rd  | 0010011 | ORI   |
+| imm[11:0] | rs1 | 111    | rd  | 0010011 | ANDI  |
+
+## Corrimientos
+
+![](./ishifttype.svg)
+
+| Imm7    | Imm5  | RS1 | Funct3 | RD  | Opcode  | Name |
+| ------- | ----- | --- | ------ | --- | ------- | ---- |
+| 0000000 | shamt | rs1 | 001    | rd  | 0010011 | SLLI |
+| 0000000 | shamt | rs1 | 101    | rd  | 0010011 | SRLI |
+| 0100000 | shamt | rs1 | 101    | rd  | 0010011 | SRAI |
+
+## Carga en memoria
+
+| Imm12     | RS1 | Funct3 | RD  | Opcode  | Name |
+| --------- | --- | ------ | --- | ------- | ---- |
+| imm[11:0] | rs1 | 000    | rd  | 0000011 | LB   |
+| imm[11:0] | rs1 | 001    | rd  | 0000011 | LH   |
+| imm[11:0] | rs1 | 010    | rd  | 0000011 | LW   |
+| imm[11:0] | rs1 | 100    | rd  | 0000011 | LBU  |
+| imm[11:0] | rs1 | 101    | rd  | 0000011 | LHU  |
+
+## Saltos incondicionales
+
+| Imm12     | RS1 | Funct3 | RD  | Opcode  | Name |
+| --------- | --- | ------ | --- | ------- | ---- |
+| imm[11:0] | rs1 | 000    | rd  | 1100111 | JALR |
+
+## Interrupciones
+
+| Imm12        | RS1   | Funct3 | RD    | Opcode  | Name   |
+| ------------ | ----- | ------ | ----- | ------- | ------ |
+| 000000000000 | 00000 | 000    | 00000 | 1110011 | ECALL  |
+| 000000000001 | 00000 | 000    | 00000 | 1110011 | EBREAK |
+
+## Tipo S
+
+![](./stype.svg)
+
+| Imm7      | RS2 | RS1 | Funct3 | Imm5     | Opcode  | Name |
+| --------- | --- | --- | ------ | -------- | ------- | ---- |
+| imm[11:5] | rs2 | rs1 | 000    | imm[4:0] | 0100011 | SB   |
+| imm[11:5] | rs2 | rs1 | 001    | imm[4:0] | 0100011 | SH   |
+| imm[11:5] | rs2 | rs1 | 010    | imm[4:0] | 0100011 | SW   |
+
+## Tipo B
+
+![](./btype.svg)
+
+| Imm7            | RS2 | RS1 | Funct3 | Imm5           | Opcode  | Name |
+| --------------- | --- | --- | ------ | -------------- | ------- | ---- |
+| imm[12 \| 10:5] | rs2 | rs1 | 000    | imm[4:1 \| 11] | 1100011 | BEQ  |
+| imm[12 \| 10:5] | rs2 | rs1 | 001    | imm[4:1 \| 11] | 1100011 | BNE  |
+| imm[12 \| 10:5] | rs2 | rs1 | 100    | imm[4:1 \| 11] | 1100011 | BLT  |
+| imm[12 \| 10:5] | rs2 | rs1 | 101    | imm[4:1 \| 11] | 1100011 | BGE  |
+| imm[12 \| 10:5] | rs2 | rs1 | 110    | imm[4:1 \| 11] | 1100011 | BLTU |
+| imm[12 \| 10:5] | rs2 | rs1 | 111    | imm[4:1 \| 11] | 1100011 | BGEU |
+
+## Tipo J
+
+![](./jtype.svg)
+
+| Imm20                          | RD  | Opcode  | Name |
+| ------------------------------ | --- | ------- | ---- |
+| imm[20 \| 10:1 \| 11 \| 19:12] | rd  | 1101111 | JAL  |
+
+## Tipo U
+
+![](./utype.svg)
+
+| Imm20      | RD  | Opcode  | Name  |
+| ---------- | --- | ------- | ----- |
+| imm[31:12] | rd  | 0110111 | LUI   |
+| imm[31:12] | rd  | 0010111 | AUIPC |
