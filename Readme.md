@@ -154,7 +154,6 @@ en la siguiente imagen.
 ![](./utype.svg)
 ![](./jtype.svg)
 
-
 Como se puede apreciar en la figura anterior, a excepción de las instrucciones
 del tipo _S_ y _B_, las demás tienen un campo _rd_. En esta parte usted
 adicionará la codificación de este campo en la salida. Para este momento usted
@@ -190,13 +189,13 @@ Como producto del ejercicio anterior usted ya debe contar con todos los datos de
 las instrucciones en una estructura de datos. Esta estructura usted la eligió
 teniendo en cuenta sus conocimientos pero si ve la necesidad la puede cambiar
 más adelante. Lo importante es ir revisando las necesidades que se presentan y
-de ser necesario realizar los camios o ajustes necesarios.
+de ser necesario realizar los cambios o ajustes necesarios.
 
 Adicionalmente ya debe estar familiarizado con el tratamiento del archivo de
 entrada y por ende ya debe estar en capacidad de codificar cualquier instrucción
 de tipo _R_.
 
-![alt text](image-1.png)
+![](./rtype.svg)
 
 Hay instrucciones que tienen constantes o, como también las llamaremos, valores
 inmediatos. Por ejemplo las instrucciones tipo _I_ son de ese grupo.  En el caso
@@ -204,7 +203,7 @@ de estas instrucciones es necesario codificar las constantes. Este proceso es
 simple pero requiere de algunas consideraciones. Las constantes de este grupo
 deben ser representables en 12 bits.
 
-![alt text](image-2.png)
+![](./itype.svg)
 
 Note que la única diferencia entre los dos tipos de instrucciones es la
 constante o valor inmediato. Para codificar esta parte debe tener en cuenta dos
@@ -212,7 +211,7 @@ aspectos:
 
 1. La constante de caer en 12 bits y de no ser el caso su programa debe fallar
    reportando el error.
-1. La constante puede ser negativa. En este caso la forma de codificarla es
+2. La constante puede ser negativa. En este caso la forma de codificarla es
    utilizando el complemento a 2 en su representación binaria. 
 
 Con la culminación de este ejercicio ya lleva un 40 porciento completado. Sin
@@ -249,7 +248,8 @@ en cuenta que es diferente por cada operación). La constante de estas
 operaciones está en la parte donde estaban el _rs2_ y el _funct7_ para las tipo
 _R_:
 
-![alt text](image-5.png)
+![](./rtype.svg)
+![](./itype.svg)
 
 todas las operaciones tipo _I_ deben llevar la constante codificada en esta
 parte.
@@ -291,14 +291,12 @@ son del tipo _I_. Esto es importante porque ya se definió como la constante deb
 ser codificada: 12 bits y en complemento a dos.
 
 La parte de la constante en las instrucciones del segundo grupo deben ser
-codificadas así:
+codificadas así: 
 
-![alt text](image-8.png)
+![](./stype.svg)
 
 Note que en este caso la constante debe quedar codificada en dos partes
-separadas de la instrucción. Aquí puede resultar más útil la siguiente imágen:
-
-![alt text](image-9.png)
+separadas de la instrucción.
 
 En la parte menos significativa está el _opcode_. Luego van los 5 bits menos
 significativos de la constante (cuya representación es en 12 bits), al final, en
@@ -399,7 +397,7 @@ misma.
 
 La siguiente imagen muestra la distribución de la información de una instrucción tipo _B_:
 
-![alt text](image-12.png)
+![](./btype.svg)
 
 
 Como es posible evidenciar es muy parecida a la distribución de la información
@@ -435,7 +433,8 @@ la cual usted ya tiene experiencia así que se puede reducir a 3 instrucciones.
 
 La instrucción `jalr` es codificada de la siguiente forma:
 
-![alt text](image-14.png)
+![](./jtype.svg)
+
 
 En este caso lo único complicado es que se trata de una constante de 21 bits.
 Las otras dos partes son simplemente dos valores, un _opcode_ de 7 bits y un
@@ -471,7 +470,8 @@ Las dos instrucciones que usted codificará en este ejercicio son:
 Son realmente sencillas, más que las del punto anterior. Tienen el siguiente
 formato:
 
-![alt text](image-16.png)
+![](./utype.svg)
+
 
 En este caso la constante es de 20 bits y será asignada a la codificación de la
 siguiente manera:
