@@ -342,6 +342,9 @@ Ese programa quedará en la memoria de la siguiente forma:
 | 20   (__label1__) | addi x6, zero, 100         |
 | 24   (__label2__) | add zero, zero, zero       |
 
+
+![](./exprogram.drawio.svg)
+
 Para calcular como se debe codificar una etiqueta hay que tener en cuenta dos
 partes: la parte en la que la etiqueta es definida y la parte en la que la
 etiqueta es utilizada. En nuestro caso, la etiqueta _label1_ es definida para
