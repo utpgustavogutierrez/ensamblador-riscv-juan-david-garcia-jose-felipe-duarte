@@ -267,6 +267,7 @@ su ensamblador emitirá un error e indicará la línea en el archivo fuente dond
 este ocurre.
 
 ![](./ishifttype.svg)
+![](./iimm.svg)
 
 # Ejercicio 5
 
@@ -300,6 +301,7 @@ La parte de la constante en las instrucciones del segundo grupo deben ser
 codificadas así: 
 
 ![](./stype.svg)
+![](./simm.svg)
 
 Note que en este caso la constante debe quedar codificada en dos partes
 separadas de la instrucción.
@@ -404,6 +406,7 @@ misma.
 La siguiente imagen muestra la distribución de la información de una instrucción tipo _B_:
 
 ![](./btype.svg)
+![](./bimm.svg)
 
 Como es posible evidenciar es muy parecida a la distribución de la información
 de las instrucciones tipo _S_ que usted ya realizó en el ejercicio 5. Es decir
@@ -438,6 +441,7 @@ La instrucción `jalr`, que pertenece al grupo de instrucciones [Tipo J](#tipo-j
 es codificada de la siguiente forma:
 
 ![](./jtype.svg)
+![](./jimm.svg)
 
 En este caso lo único complicado es que se trata de una constante de 21 bits.
 Las otras dos partes son simplemente dos valores, un _opcode_ de 7 bits y un
@@ -471,6 +475,7 @@ U](#tipo-u). Son realmente sencillas, más que las del punto anterior. Tienen el
 siguiente formato:
 
 ![](./utype.svg)
+![](./uimm.svg)
 
 En este caso la constante es de 20 bits y será asignada a la codificación de la
 siguiente manera:
